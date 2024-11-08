@@ -43,13 +43,6 @@ def main():
     # Run the application setup with the provided project and app names
     Application.run(args.project_name, args.app_name)
 
+# Entry point
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-

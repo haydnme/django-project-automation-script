@@ -7,4 +7,4 @@ requires-python = ">=3.12"
 dependencies = []
 
 [tool.uv.workspace]
-members = ["my_site", "app_test", "my_site_2"]
+members = ["django_project_1"]
