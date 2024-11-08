@@ -36,6 +36,11 @@ class DjangoProjectManager:
         with open("templates/base.html", 'w') as f:
             f.write("<!-- Base HTML Template -->")
         
+        # Create a style.css file in the static/css directory
+        with open("static/css/style.css", 'w') as f:
+            f.write("/* Main stylesheet */")
+            print("Created style.css in static/css")
+
         # App-level directories and files
         if app_name:
             app_template_path = f"{app_name}/templates/{app_name}"
