@@ -19,6 +19,7 @@ class DjangoProjectManager:
                 print(f"Django app '{app_name}' created successfully.")
                 
             DjangoProjectManager.create_additional_folders(app_name)
+            DjangoProjectManager.setup_tailwind()
         except subprocess.CalledProcessError as e:
             print(f"Failed to create Django project or app: {str(e)}")
             sys.exit(1)
@@ -80,3 +81,46 @@ class DjangoProjectManager:
         with open(".env-template", 'w') as f:
             f.write(env_content)
             print("Created .env-template in the installation directory.")
+
+    @staticmethod
+    def check_npm_installed():
+        """Check if 'npm' is installed on the system."""
+        try:
+            subprocess.run(['npm', '--version'], check=True, stdout=subprocess.PIPE)
+            print("npm is already installed.")
+            return True
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            print("npm is not installed.")
+            return False
+
+    @staticmethod
+    def setup_tailwind():
+        """Prompt the user to install Tailwind CSS and set it up if desired."""
+        response = input("Do you want to install Tailwind CSS? [y/n]: ").strip().lower()
+        if response != 'y':
+            print("Skipping Tailwind CSS setup.")
+            return
+        
+        # Check if npm is installed
+        if not DjangoProjectManager.check_npm_installed():
+            print("Please install npm to proceed with Tailwind CSS setup.")
+            sys.exit(1)
+        
+        # Initialize npm and install Tailwind CSS
+        try:
+            print("Initializing npm...")
+            subprocess.run(['npm', 'init', '-y'], check=True)
+            print("Installing Tailwind CSS...")
+            subprocess.run(['npm', 'install', 'tailwindcss'], check=True)
+            print("Running Tailwind CSS init...")
+            subprocess.run(['npx', 'tailwindcss', 'init'], check=True)
+            
+            # Create tailwind.css in the static/css directory
+            tailwind_css_path = "static/css/tailwind.css"
+            with open(tailwind_css_path, 'w') as f:
+                f.write("/* Tailwind CSS */\n@tailwind base;\n@tailwind components;\n@tailwind utilities;")
+            print(f"Created tailwind.css in {tailwind_css_path}")
+        
+        except subprocess.CalledProcessError as e:
+            print(f"An error occurred while setting up Tailwind CSS: {str(e)}")
+            sys.exit(1)

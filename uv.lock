@@ -4,7 +4,7 @@ requires-python = ">=3.12"
 [manifest]
 members = [
     "django-install-configure",
-    "django-project-1",
+    "my-site-1",
 ]
 
 [[package]]
@@ -36,9 +36,9 @@ version = "0.1.0"
 source = { virtual = "." }
 
 [[package]]
-name = "django-project-1"
+name = "my-site-1"
 version = "0.1.0"
-source = { virtual = "django_project_1" }
+source = { virtual = "my_site_1" }
 dependencies = [
     { name = "django" },
 ]
