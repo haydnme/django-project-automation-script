@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="django-install-configure",
+    name="django-setup",
     version="1.0.0",
     packages=find_packages(),
     entry_points={
