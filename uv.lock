@@ -4,7 +4,7 @@ requires-python = ">=3.12"
 [manifest]
 members = [
     "app-test",
-    "django-install-configure",
+    "django-setup",
     "my-site-1",
 ]
 
@@ -43,7 +43,7 @@ wheels = [
 ]
 
 [[package]]
-name = "django-install-configure"
+name = "django-setup"
 version = "0.1.0"
 source = { virtual = "." }
 

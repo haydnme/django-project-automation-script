@@ -5,3 +5,6 @@ description = "Django project creation automation tool."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
+
+[tool.uv.workspace]
+members = ["my_site_1", "main_site_1", "app_test"]

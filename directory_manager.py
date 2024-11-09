@@ -2,25 +2,25 @@ import os
 import sys
 
 class DirectoryManager:
-    """Handles creation and management of directories for the Django project."""
-
+    """Handles directory-related operations."""
+    
     @staticmethod
     def prompt_for_directory():
-        """Prompt user for the directory where the Django project should be installed, ensuring it isn't a reserved name."""
+        """Prompt user for the installation directory and ensure it is correctly returned."""
         disallowed_names = {'test', 'django', 'site', 'admin', 'main', 'manage', 'static', 'templates', 'media'}
+        
         while True:
-            directory = input("Enter the installation directory (relative or absolute path) for your Django project: ")
-            directory = os.path.abspath(directory)
+            directory = input("Enter the installation directory (relative or absolute path) for your Django project: ").strip()
+            directory = os.path.abspath(directory)  # Ensure we get an absolute path
             directory_name = os.path.basename(directory)
 
-            if os.path.exists(directory) and os.listdir(directory):
-                print(f"The directory '{directory}' already exists and is not empty. Please choose another location.")
-                sys.exit(1)
-
             if directory_name.lower() in disallowed_names:
-                print(f"The directory name '{directory_name}' is reserved and cannot be used. Please choose another name.")
+                print(f"The directory name '{directory_name}' is reserved. Please choose another name.")
             else:
-                os.makedirs(directory, exist_ok=True)
-                os.chdir(directory)
-                print(f"Changed directory to {directory}")
-                break
+                try:
+                    os.makedirs(directory, exist_ok=True)
+                    os.chdir(directory)
+                    print(f"Changed directory to {directory}")
+                    return directory  # Return the directory path after changing into it
+                except Exception as e:
+                    print(f"Error creating or accessing the directory: {e}")
