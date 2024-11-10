@@ -50,7 +50,7 @@ This script automates the setup process for Django projects, incorporating addit
 Navigate to your project directory to start the Django server:
    ```bash
    cd <project_name>
-   uv run python manage.py runserver
+   uv run manage.py runserver
    ```
 
 **Author**: Haydn Ellen  
